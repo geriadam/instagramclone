@@ -15,6 +15,17 @@ router.get('/allpost', (req, res) => {
     })
 })
 
+router.get('/mypost', requiredLogin, (req, res) => {
+    Post.find({postedBy: req.user._id})
+    .populate("postedBy", "_id name")
+    .then(posts => {
+        res.json({posts})
+    })
+    .catch(err => {
+        res.json({message: err})
+    })
+})
+
 router.post('/createpost', requiredLogin, (req, res) => {
     const { title, body } = req.body
     if(!title && !body){
