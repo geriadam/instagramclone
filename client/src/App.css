@@ -66,3 +66,18 @@ a {
     transform: rotate(360deg);
   }
 }
+
+/*
+* HOME CSS
+**/
+
+.home {
+  margin: 26px auto;
+}
+
+.home-card {
+  max-width: 500px;
+  height: max-content;
+  margin: 26px auto;
+}
+
