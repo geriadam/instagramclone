@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {PROD_URL} from '../../utils/constants'
-import $ from "jquery";
 import M from 'materialize-css'
 
 const Signup = () => {
@@ -20,7 +19,7 @@ const Signup = () => {
         } catch (error) {
             M.toast({html: error.response.data.error, classes: "#c62828 red darken-3"})
         }
-    }    
+    }  
 
     return (
         <div className="myCard">
