@@ -36,6 +36,10 @@ a {
   margin-top: 30px;
 }
 
+.brand-logo, .auth-card h2 {
+  font-family: "Grand Hotel"
+}
+
 .auth-card {
   padding: 20px;
   text-align: center;

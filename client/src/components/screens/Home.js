@@ -9,7 +9,7 @@ const Home = () => {
                     <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" />
                 </dvi>
                 <div className="card-content">
-                    <i class="material-icons">favorite</i>
+                    <i className="material-icons">favorite</i>
                     <h6>Title</h6>
                     <p>This is amazing post</p>
                     <input type="text" placeholder="add a comment" />
@@ -21,7 +21,7 @@ const Home = () => {
                     <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" />
                 </dvi>
                 <div className="card-content">
-                    <i class="material-icons">favorite</i>
+                    <i className="material-icons" style={{color: "red"}}>favorite</i>
                     <h6>Title</h6>
                     <p>This is amazing post</p>
                     <input type="text" placeholder="add a comment" />
