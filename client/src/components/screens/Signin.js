@@ -14,6 +14,8 @@ const Signin = () => {
                 email: email,
                 password: password
             });
+            localStorage.setItem("jwt", response.data.token)
+            localStorage.setItem("user", JSON.stringify(response.data.user))
             M.toast({html: response.data.message, classes: "#43a04 green darken-3"})
             history.push('/')
         } catch (error) {

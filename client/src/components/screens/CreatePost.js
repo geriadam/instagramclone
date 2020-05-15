@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {PROD_URL} from '../../utils/constants'
@@ -10,6 +10,31 @@ const CreatePost = () => {
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
     const [url, setUrl] = useState("")
+
+    useEffect(() => {
+        async function postData () {
+            try {
+                const response = await axios.post(PROD_URL + "createpost", {
+                    title,
+                    body,
+                    pic: url
+                },{
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": 'Bearer ' + localStorage.getItem('jwt') //the token is a variable which holds the token
+                    }
+                });
+                M.toast({html: response.data.message, classes: "#43a04 green darken-3"})
+                history.push('/')
+            } catch (error) {
+                M.toast({html: error.response.data.error, classes: "#c62828 red darken-3"})
+            }
+        }
+
+        if(url){
+            postData()
+        }
+    }, [url])
 
     const PostDetails = async () => {
         const data = new FormData()
@@ -23,18 +48,6 @@ const CreatePost = () => {
         } catch (error) {
             console.log(error.response)
             //M.toast({html: error.response, classes: "#c62828 red darken-3"})
-        }
-
-        try {
-            const response = await axios.post(PROD_URL + "createpost", {
-                title: title,
-                body: body,
-                pic: url
-            });
-            M.toast({html: response.data.message, classes: "#43a04 green darken-3"})
-            history.push('/')
-        } catch (error) {
-            M.toast({html: error.response.data.error, classes: "#c62828 red darken-3"})
         }
     }
 
