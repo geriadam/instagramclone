@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import {UserContext} from '../../App'
 import axios from 'axios'
 import {PROD_URL} from '../../utils/constants'
 import M from 'materialize-css'
 
 const Signin = () => {
+    const {state, dispatch} = useContext(UserContext)
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -16,6 +18,7 @@ const Signin = () => {
             });
             localStorage.setItem("jwt", response.data.token)
             localStorage.setItem("user", JSON.stringify(response.data.user))
+            dispatch({type: "USER", payload: response.data.user})
             M.toast({html: response.data.message, classes: "#43a04 green darken-3"})
             history.push('/')
         } catch (error) {
