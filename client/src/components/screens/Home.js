@@ -1,32 +1,49 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
+import {PROD_URL} from '../../utils/constants'
+import M from 'materialize-css'
 
 const Home = () => {
+    const [data, setData] = useState([])
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(PROD_URL + "allpost", {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": 'Bearer ' + localStorage.getItem('jwt') //the token is a variable which holds the token
+                    }
+                });
+
+                setData(response.data.posts)
+            } catch (error) {
+                M.toast({html: error.response.data.error, classes: "#c62828 red darken-3"})
+            }
+        }
+
+        getData()
+        console.log(data)
+    }, [])
     return (
         <div className="home">
-            <div className="card home-card">
-                <h5>Geri</h5>
-                <dvi className="card-image">
-                    <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" />
-                </dvi>
-                <div className="card-content">
-                    <i className="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is amazing post</p>
-                    <input type="text" placeholder="add a comment" />
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>Geri</h5>
-                <dvi className="card-image">
-                    <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" />
-                </dvi>
-                <div className="card-content">
-                    <i className="material-icons" style={{color: "red"}}>favorite</i>
-                    <h6>Title</h6>
-                    <p>This is amazing post</p>
-                    <input type="text" placeholder="add a comment" />
-                </div>
-            </div>
+            {
+                data.map(item => {
+                    return (
+                        <div className="card home-card" key={item._id}>
+                            <h5>{item.postedBy.name}</h5>
+                            <dvi className="card-image">
+                                <img src={item.photo} alt="" />
+                            </dvi>
+                            <div className="card-content">
+                                <i className="material-icons">favorite</i>
+                                <h6>{item.title}</h6>
+                                <p>{item.body}</p>
+                                <input type="text" placeholder="add a comment" />
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

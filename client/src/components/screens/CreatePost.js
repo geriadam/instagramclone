@@ -12,7 +12,7 @@ const CreatePost = () => {
     const [url, setUrl] = useState("")
 
     useEffect(() => {
-        async function postData () {
+        const postData = async () => {
             try {
                 const response = await axios.post(PROD_URL + "createpost", {
                     title,
