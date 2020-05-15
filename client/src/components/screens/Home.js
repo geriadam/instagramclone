@@ -17,12 +17,11 @@ const Home = () => {
 
                 setData(response.data.posts)
             } catch (error) {
-                M.toast({html: error.response.data.error, classes: "#c62828 red darken-3"})
+                M.toast({html: error.response.data.message, classes: "#c62828 red darken-3"})
             }
         }
 
         getData()
-        console.log(data)
     }, [])
     return (
         <div className="home">
