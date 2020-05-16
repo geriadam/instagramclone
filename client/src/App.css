@@ -85,3 +85,11 @@ a {
   margin: 26px auto;
 }
 
+.home-card h5 {
+  padding: 6px;
+}
+
+.material-icons:hover {
+  cursor: pointer;
+}
+

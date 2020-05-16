@@ -39,6 +39,7 @@ const Profile = () => {
                 </div>
                 <div>
                     <h4>{state ? state.name : "Loading"}</h4>
+                    <h4>{state ? state.email : "Loading"}</h4>
                     <div style={{display: "flex"}}>
                         <h5>{data.length} Post</h5>
                         <h5>{state?.followers?.length} Follower</h5>

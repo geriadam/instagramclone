@@ -16,6 +16,18 @@ router.get('/allpost', requiredLogin, (req, res) => {
     })
 })
 
+router.get('/getsubpost', requiredLogin, (req, res) => {
+    Post.find({postedBy: {$in: req.user.following}})
+    .populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .then(posts => {
+        res.json({posts})
+    })
+    .catch(err => {
+        res.json({message: err})
+    })
+})
+
 router.get('/mypost', requiredLogin, (req, res) => {
     Post.find({postedBy: req.user._id})
     .populate("postedBy", "_id name")

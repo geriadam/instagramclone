@@ -79,7 +79,7 @@ const UserProfile = () => {
                 }
             })
 
-            setShowFollow(false)
+            setShowFollow(true)
 
         } catch (error) {
             M.toast({html: "Error follow user", classes: "#c62828 red darken-3"})
@@ -102,6 +102,7 @@ const UserProfile = () => {
                         </div>
                         <div>
                             <h4>{userProfile.name}</h4>
+                            <h4>{userProfile.email}</h4>
                             <div style={{display: "flex"}}>
                                 <h5>{post.length} Post</h5>
                                 <h5>{userProfile?.followers?.length} Follower</h5>

@@ -5,13 +5,13 @@ import {PROD_URL} from '../../utils/constants'
 import M from 'materialize-css'
 import {Link} from 'react-router-dom'
 
-const Home = () => {
+const SubscribesUserPosts = () => {
     const [data, setData] = useState([])
     const {state, dispatch} = useContext(UserContext)
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await axios.get(PROD_URL + "allpost", {
+                const response = await axios.get(PROD_URL + "getsubpost", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": 'Bearer ' + localStorage.getItem('jwt')
@@ -191,4 +191,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default SubscribesUserPosts;
