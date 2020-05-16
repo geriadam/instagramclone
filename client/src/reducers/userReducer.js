@@ -17,5 +17,12 @@ export const reducer = (state, action) => {
         }
     }
 
+    if(action.type == "UPDATEPIC"){
+        return {
+            ...state,
+            photo: action.payload.photo
+        }
+    }
+
     return state
 }
