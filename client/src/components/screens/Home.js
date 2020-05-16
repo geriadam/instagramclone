@@ -13,7 +13,7 @@ const Home = () => {
                 const response = await axios.get(PROD_URL + "allpost", {
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": 'Bearer ' + localStorage.getItem('jwt') //the token is a variable which holds the token
+                        "Authorization": 'Bearer ' + localStorage.getItem('jwt')
                     }
                 });
 
@@ -33,7 +33,7 @@ const Home = () => {
             },{
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": 'Bearer ' + localStorage.getItem('jwt') //the token is a variable which holds the token
+                    "Authorization": 'Bearer ' + localStorage.getItem('jwt')
                 }
             });
             const newData = data.map(item => {
@@ -56,7 +56,7 @@ const Home = () => {
             },{
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": 'Bearer ' + localStorage.getItem('jwt') //the token is a variable which holds the token
+                    "Authorization": 'Bearer ' + localStorage.getItem('jwt')
                 }
             });
             const newData = data.map(item => {
@@ -70,6 +70,34 @@ const Home = () => {
             setData(newData)
         } catch (error) {
             M.toast({html: error.response.data.message, classes: "#c62828 red darken-3"})
+        }
+    }
+
+    const makeComment = async (text, postId) => {
+        try {
+            const response = await axios.put(PROD_URL + "comment", {
+                postId,
+                text
+            },{
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('jwt')
+                }
+            });
+
+            console.log(response.data)
+
+            const newData = data.map(item => {
+                if(item._id == response.data._id){
+                    return response.data
+                } else {
+                    return item
+                }
+            })
+
+            setData(newData)
+        } catch (error) {
+            M.toast({html: error, classes: "#c62828 red darken-3"})
         }
     }
 
@@ -105,7 +133,22 @@ const Home = () => {
                                 <h6>{item.likes.length}</h6>
                                 <h6>{item.title}</h6>
                                 <p>{item.body}</p>
-                                <input type="text" placeholder="add a comment" />
+                                {
+                                    item.comments.map(comment => {
+                                        return (
+                                            <h6 key={comment._id}>
+                                                <span style={{fontWeight: "500"}}>{comment.postedBy.name}</span>
+                                                {comment.text}
+                                            </h6>
+                                        )
+                                    })
+                                }
+                                <form onSubmit={(e) => {
+                                    e.preventDefault()
+                                    makeComment(e.target[0].value, item._id)
+                                }}>
+                                    <input type="text" placeholder="add a comment"/>
+                                </form>
                             </div>
                         </div>
                     )
