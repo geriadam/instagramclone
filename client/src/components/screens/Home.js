@@ -101,13 +101,43 @@ const Home = () => {
         }
     }
 
+    const deletePost = async (postId) => {
+        try {
+            const response = await axios.delete(PROD_URL + `deletepost/${postId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem('jwt')
+                }
+            });
+            const newData = data.filter(item => {
+                return item._id !== response.data.data._id
+            })
+            setData(newData)
+            M.toast({html: response.data.message, classes: "#43a04 green darken-3"})
+        } catch (error) {
+            M.toast({html: error, classes: "#c62828 red darken-3"})
+        }   
+    }
+
     return (
         <div className="home">
             {
                 data.map(item => {
                     return (
                         <div className="card home-card" key={item._id}>
-                            <h5>{item.postedBy.name}</h5>
+                            <h5>
+                                {item.postedBy.name} 
+                                {
+                                    item.postedBy._id === state._id &&
+                                    <i 
+                                        className="material-icons"
+                                        style={{float: "right"}}
+                                        onClick={() => deletePost(item._id)}
+                                    >
+                                        delete
+                                    </i>
+                                }
+                            </h5>
                             <dvi className="card-image">
                                 <img src={item.photo} alt="" />
                             </dvi>
@@ -137,7 +167,7 @@ const Home = () => {
                                     item.comments.map(comment => {
                                         return (
                                             <h6 key={comment._id}>
-                                                <span style={{fontWeight: "500"}}>{comment.postedBy.name}</span>
+                                                <span style={{fontWeight: "500"}}>{comment.postedBy.name} </span>
                                                 {comment.text}
                                             </h6>
                                         )
