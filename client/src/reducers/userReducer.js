@@ -9,5 +9,13 @@ export const reducer = (state, action) => {
         return initialState
     }
 
+    if(action.type == "UPDATE"){
+        return {
+            ...state,
+            followers: action.payload.followers,
+            following: action.payload.following
+        }
+    }
+
     return state
 }

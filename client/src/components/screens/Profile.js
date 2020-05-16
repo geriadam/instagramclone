@@ -40,9 +40,9 @@ const Profile = () => {
                 <div>
                     <h4>{state ? state.name : "Loading"}</h4>
                     <div style={{display: "flex"}}>
-                        <h5>5 Post</h5>
-                        <h5>5 Follower</h5>
-                        <h5>5 Following</h5>
+                        <h5>{data.length} Post</h5>
+                        <h5>{state?.followers?.length} Follower</h5>
+                        <h5>{state?.following?.length} Following</h5>
                     </div>
                 </div>
             </div>
