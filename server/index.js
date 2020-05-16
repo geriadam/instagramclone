@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
+app.use(require('./routes/user'))
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true, 
