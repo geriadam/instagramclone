@@ -48,4 +48,32 @@ router.post('/createpost', requiredLogin, (req, res) => {
     })
 })
 
+router.put("/like", requiredLogin, (req, res) => {
+    Post.findOneAndUpdate(req.body.postId, {
+        $push: {likes: req.user._id}
+    },{
+        new: true
+    }).exec((err, result) => {
+        if(err){
+            return res.status(422).json({error: err})
+        } else {
+            return res.json(result)
+        }
+    })
+})
+
+router.put("/unlike", requiredLogin, (req, res) => {
+    Post.findOneAndUpdate(req.body.postId, {
+        $pull: {likes: req.user._id}
+    },{
+        new: true
+    }).exec((err, result) => {
+        if(err){
+            return res.status(422).json({error: err})
+        } else {
+            return res.json(result)
+        }
+    })
+})
+
 module.exports = router
