@@ -35,7 +35,7 @@ const Profile = () => {
                 borderBottom: "1px solid grey"
             }}>
                 <div>
-                    <img style={{width: "160px", height: "160px", borderRadius: "80px"}} src="https://geriadam.github.io/assets/images/profile.png"/>
+                    <img style={{width: "160px", height: "160px", borderRadius: "80px"}} src={state.photo ?? "http://getdrawings.com/free-icon-bw/generic-avatar-icon-3.png"}/>
                 </div>
                 <div>
                     <h4>{state ? state.name : "Loading"}</h4>

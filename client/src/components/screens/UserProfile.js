@@ -7,10 +7,10 @@ import {useParams} from 'react-router-dom'
 
 const UserProfile = () => {
     const [userProfile, setUserProfile] = useState(null)
-    const [showFollow, setShowFollow] = useState(true)
     const [post, setPost] = useState([])
     const {state, dispatch} = useContext(UserContext)
     const {userid} = useParams()
+    const [showFollow, setShowFollow] = useState(state?!state.following.includes(userid):true)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -98,7 +98,7 @@ const UserProfile = () => {
                         borderBottom: "1px solid grey"
                     }}>
                         <div>
-                            <img style={{width: "160px", height: "160px", borderRadius: "80px"}} src="https://geriadam.github.io/assets/images/profile.png"/>
+                            <img style={{width: "160px", height: "160px", borderRadius: "80px"}} src={userProfile.photo ?? "http://getdrawings.com/free-icon-bw/generic-avatar-icon-3.png"}/>
                         </div>
                         <div>
                             <h4>{userProfile.name}</h4>
