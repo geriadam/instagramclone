@@ -62,7 +62,7 @@ router.post('/createpost', requiredLogin, (req, res) => {
 })
 
 router.put("/like", requiredLogin, (req, res) => {
-    Post.findOneAndUpdate(req.body.postId, {
+    Post.findByIdAndUpdate(req.body.postId, {
         $push: {likes: req.user._id}
     },{
         new: true
@@ -76,7 +76,7 @@ router.put("/like", requiredLogin, (req, res) => {
 })
 
 router.put("/unlike", requiredLogin, (req, res) => {
-    Post.findOneAndUpdate(req.body.postId, {
+    Post.findByIdAndUpdate(req.body.postId, {
         $pull: {likes: req.user._id}
     },{
         new: true
@@ -95,7 +95,7 @@ router.put("/comment", requiredLogin, (req, res) => {
         postedBy: req.user._id
     }
 
-    Post.findOneAndUpdate(req.body.postId, {
+    Post.findByIdAndUpdate(req.body.postId, {
         $push: {comments: comment}
     },{
         new: true

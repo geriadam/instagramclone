@@ -46,7 +46,7 @@ const Home = () => {
             })
             setData(newData)
         } catch (error) {
-            M.toast({html: error.response.data.message, classes: "#c62828 red darken-3"})
+            M.toast({html: error, classes: "#c62828 red darken-3"})
         }
     }
 
@@ -70,7 +70,7 @@ const Home = () => {
 
             setData(newData)
         } catch (error) {
-            M.toast({html: error.response.data.message, classes: "#c62828 red darken-3"})
+            M.toast({html: error, classes: "#c62828 red darken-3"})
         }
     }
 
@@ -151,14 +151,14 @@ const Home = () => {
                                     ?
                                     <i
                                         className="material-icons"
-                                        onClick={() => unlikePost(item.id)}
+                                        onClick={() => unlikePost(item._id)}
                                     >
                                         thumb_down
                                     </i>
                                     :
                                     <i
                                         className="material-icons"
-                                        onClick={() => likePost(item.id)}
+                                        onClick={() => likePost(item._id)}
                                     >
                                         thumb_up
                                     </i>
